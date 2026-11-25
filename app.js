@@ -158,15 +158,26 @@ priceForm.addEventListener("submit", (event) => {
   } catch {
     message.textContent = "Could not save this sighting. Please check your browser storage and try again.";
   }
-  const clockTime =
+  // =====================================
+// TIMELINE BREACH EVENT
+// =====================================
+
+const clockTime =
   document.querySelector(".clock-time");
 
 const latestPrice =
   document.querySelector("#latest-price");
 
+const latestDate =
+  document.querySelector("#latest-date");
+
 function timelineBreach() {
 
-  if (!clockTime || !latestPrice) {
+  if (
+    !clockTime ||
+    !latestPrice ||
+    !latestDate
+  ) {
     return;
   }
 
@@ -174,10 +185,49 @@ function timelineBreach() {
     "timeline-breach"
   );
 
-  clockTime.textContent = "11:59";
+  const originalTime =
+    clockTime.textContent;
+
+  const originalPrice =
+    latestPrice.textContent;
+
+  const originalDate =
+    latestDate.textContent;
+
+  const glitchTimes = [
+    "11:59",
+    "12:00",
+    "12:01",
+    "11:60",
+    "??:??",
+    "∞:∞"
+  ];
+
+  clockTime.textContent =
+    glitchTimes[
+      Math.floor(
+        Math.random() *
+        glitchTimes.length
+      )
+    ];
 
   latestPrice.textContent =
     "$42,183.91";
+
+  latestDate.textContent =
+    "TIMELINE BREACH DETECTED";
+
+  if (Math.random() < 0.15) {
+
+    latestDate.textContent =
+      "DO NOT TRUST THE CLOCK";
+  }
+
+  if (Math.random() < 0.05) {
+
+    latestPrice.textContent =
+      "$∞";
+  }
 
   setTimeout(() => {
 
@@ -185,9 +235,14 @@ function timelineBreach() {
       "timeline-breach"
     );
 
-    clockTime.textContent = "11:58";
+    clockTime.textContent =
+      originalTime;
 
-    latestPrice.textContent = "$0.99";
+    latestPrice.textContent =
+      originalPrice;
+
+    latestDate.textContent =
+      originalDate;
 
   }, 2500);
 }
