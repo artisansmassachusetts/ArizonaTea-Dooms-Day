@@ -154,18 +154,78 @@ h1 span {
   display: inline-block;
   border-radius: 50%;
   text-decoration: none;
-  transition: transform 180ms ease, filter 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    filter 250ms ease,
+    transform 250ms ease;
 }
 
+/* Desktop hover */
 .clock-easter-egg:hover {
-  filter: brightness(1.16);
-  transform: rotate(-2deg) scale(1.025);
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* Mobile tap and keyboard */
+.clock-easter-egg:active,
+.clock-easter-egg:focus-visible {
+  filter: brightness(1.08);
+  transform: scale(1.02);
+}
+
+/* Slight glow change */
+.clock-easter-egg:hover .clock-face,
+.clock-easter-egg:active .clock-face,
+.clock-easter-egg:focus-visible .clock-face {
+  box-shadow:
+    0 0 0 7px rgb(255 209 102 / 10%),
+    0 0 42px rgb(240 91 80 / 34%),
+    inset 0 0 24px rgb(0 0 0 / 35%);
+}
+
+.clock-time {
+  transition:
+    color 250ms ease,
+    letter-spacing 250ms ease;
+}
+
+.clock-easter-egg:hover .clock-time,
+.clock-easter-egg:active .clock-time,
+.clock-easter-egg:focus-visible .clock-time {
+  color: #fff8dc;
+  letter-spacing: 3px;
+}
+
+/* Secret pulse */
+.clock-face {
+  animation:
+    easter-egg-pulse 45s ease-in-out infinite;
+}
+
+@keyframes easter-egg-pulse {
+  0%, 99.5%, 100% {
+    filter: brightness(1);
+  }
+
+  99.75% {
+    filter: brightness(1.08);
+  }
 }
 
 .clock-easter-egg:focus-visible {
   outline: 2px solid #ffd166;
   outline-offset: 8px;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .clock-easter-egg,
+  .clock-time,
+  .clock-face {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 
 .clock-motif figcaption a {
   color: inherit;
