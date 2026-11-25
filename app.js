@@ -214,13 +214,14 @@ function timelineBreach() {
       )
     ];
 
-  const fakePrices = [
-    "$42,183.91",
-    "$9,994.23",
-    "$88,888.88",
-    "$1,245,199.12",
-    "$∞"
-  ];
+const fakePrices = [
+  "$42,183.91",
+  "$88,888.88",
+  "$999,999.99",
+  "$4,285,991.17",
+  "$77,000,000.00",
+  "$∞"
+];
 
   latestPrice.textContent =
     fakePrices[
@@ -262,7 +263,7 @@ function timelineBreach() {
     latestDate.textContent =
       originalDate;
 
-  }, 2500);
+  }, 3000);
 }
 
 setInterval(
