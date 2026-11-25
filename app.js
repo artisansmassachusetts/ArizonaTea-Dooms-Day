@@ -231,14 +231,14 @@ const fakePrices = [
       )
     ];
 
-  const breachMessages = [
+ const breachMessages = [
   "TIMELINE BREACH DETECTED",
   "TIK TOK TIK TOK",
   "CLICK THE CLOCK",
   "UNAUTHORIZED TIMELINE",
   "PRICE CONTAINMENT FAILURE",
   "11:59 WATCHES YOU",
-  "REALITY DESYNC DETECTED"
+  "REALITY DESYNC DETECTED",
   "I HEARD YOUR MOM CALLING YOU"
 ];
   
@@ -276,4 +276,4 @@ setTimeout(
 setInterval(
   timelineBreach,
   10000
-);2
+);
