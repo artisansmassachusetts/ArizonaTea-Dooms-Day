@@ -232,14 +232,16 @@ const fakePrices = [
     ];
 
   const breachMessages = [
-    "TIMELINE BREACH DETECTED",
-    "DO NOT TRUST THE CLOCK",
-    "UNAUTHORIZED TIMELINE",
-    "PRICE ANOMALY DETECTED",
-    "CONTAINMENT FAILURE",
-    "ALTERNATE REALITY OBSERVED"
-  ];
-
+  "TIMELINE BREACH DETECTED",
+  "TIK TOK TIK TOK",
+  "CLICK THE CLOCK",
+  "UNAUTHORIZED TIMELINE",
+  "PRICE CONTAINMENT FAILURE",
+  "11:59 WATCHES YOU",
+  "REALITY DESYNC DETECTED"
+  "I HEARD YOUR MOM CALLING YOU"
+];
+  
   latestDate.textContent =
     breachMessages[
       Math.floor(
@@ -266,7 +268,12 @@ const fakePrices = [
   }, 3000);
 }
 
+setTimeout(
+  timelineBreach,
+  10000
+);
+
 setInterval(
   timelineBreach,
-  99000
-);
+  10000
+);2
