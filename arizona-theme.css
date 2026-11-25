@@ -271,19 +271,19 @@ h1 span {
 .timeline-breach .clock-hand-hour {
   transform:
     translateX(-50%)
-    rotate(40deg);
+    rotate(85deg);
 
   transition:
-    transform 0.2s ease;
+    transform .15s ease;
 }
 
 .timeline-breach .clock-hand-minute {
   transform:
     translateX(-50%)
-    rotate(250deg);
+    rotate(330deg);
 
   transition:
-    transform 0.2s ease;
+    transform .15s ease;
 }
 
 .timeline-breach #latest-price {
