@@ -261,20 +261,6 @@ h1 span {
     inset 0 0 24px rgba(255, 51, 79, .2);
 }
 
-.timeline-breach {
-  animation:
-    breach-flicker 0.12s linear 25;
-}
-
-.timeline-breach .clock-face {
-  border-color: #ff334f;
-
-  box-shadow:
-    0 0 25px rgba(255, 51, 79, .7),
-    0 0 80px rgba(255, 51, 79, .5),
-    inset 0 0 24px rgba(255, 51, 79, .2);
-}
-
 .timeline-breach .clock-time {
   color: #ff334f;
 
@@ -341,3 +327,18 @@ h1 span {
     opacity: 0.45;
   }
 }
+
+.timeline-breach::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  background:
+    rgba(255, 0, 40, .15);
+
+  pointer-events: none;
+}
+
