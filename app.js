@@ -160,6 +160,8 @@ priceForm.addEventListener("submit", (event) => {
   }
   // =====================================
 // TIMELINE BREACH EVENT
+// Every 99 seconds the alternate
+// timeline leaks into the main page.
 // =====================================
 
 const clockTime =
@@ -181,10 +183,6 @@ function timelineBreach() {
     return;
   }
 
-  document.body.classList.add(
-    "timeline-breach"
-  );
-
   const originalTime =
     clockTime.textContent;
 
@@ -193,6 +191,10 @@ function timelineBreach() {
 
   const originalDate =
     latestDate.textContent;
+
+  document.body.classList.add(
+    "timeline-breach"
+  );
 
   const glitchTimes = [
     "11:59",
@@ -211,23 +213,38 @@ function timelineBreach() {
       )
     ];
 
+  const fakePrices = [
+    "$42,183.91",
+    "$9,994.23",
+    "$88,888.88",
+    "$1,245,199.12",
+    "$∞"
+  ];
+
   latestPrice.textContent =
-    "$42,183.91";
+    fakePrices[
+      Math.floor(
+        Math.random() *
+        fakePrices.length
+      )
+    ];
+
+  const breachMessages = [
+    "TIMELINE BREACH DETECTED",
+    "DO NOT TRUST THE CLOCK",
+    "UNAUTHORIZED TIMELINE",
+    "PRICE ANOMALY DETECTED",
+    "CONTAINMENT FAILURE",
+    "ALTERNATE REALITY OBSERVED"
+  ];
 
   latestDate.textContent =
-    "TIMELINE BREACH DETECTED";
-
-  if (Math.random() < 0.15) {
-
-    latestDate.textContent =
-      "DO NOT TRUST THE CLOCK";
-  }
-
-  if (Math.random() < 0.05) {
-
-    latestPrice.textContent =
-      "$∞";
-  }
+    breachMessages[
+      Math.floor(
+        Math.random() *
+        breachMessages.length
+      )
+    ];
 
   setTimeout(() => {
 
