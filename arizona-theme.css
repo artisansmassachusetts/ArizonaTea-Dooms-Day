@@ -158,8 +158,48 @@ h1 span {
   transition:
     filter 250ms ease,
     transform 250ms ease;
+    position: relative;
 }
+.clock-whisper {
 
+  position: absolute;
+
+  top: -15px;
+  right: -60px;
+
+  color: #ffd166;
+
+  font-size: 1.4rem;
+
+  font-family: "Caveat", cursive;
+
+  font-style: italic;
+
+  transform: rotate(-12deg);
+
+  text-shadow:
+    0 0 8px rgba(255,209,102,.5);
+
+  animation:
+    wonderland-float 4s
+    ease-in-out infinite;
+
+  pointer-events: none;
+}
+@keyframes wonderland-float {
+
+  0%,100% {
+    transform:
+      translateY(0)
+      rotate(-12deg);
+  }
+
+  50% {
+    transform:
+      translateY(-6px)
+      rotate(-16deg);
+  }
+}
 /* Desktop hover */
 .clock-easter-egg:hover {
   filter: brightness(1.05);
