@@ -1,5 +1,155 @@
+:root {
+  color-scheme: dark;
+  --ink: #fff8dc;
+  --muted: #b9dcd1;
+  --red: #f05b50;
+  --red-dark: #c83e49;
+  --paper: #07544f;
+  --panel: #0b625a;
+  --line: #3b9586;
+  --amber: #ffd166;
+}
 
-/* Clock Easter egg link */
+body {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgb(40 200 176 / 28%), transparent 34rem),
+    radial-gradient(ellipse at 88% 16%, rgb(245 111 91 / 30%), transparent 30rem),
+    radial-gradient(ellipse at 54% 100%, rgb(255 209 102 / 17%), transparent 38rem),
+    linear-gradient(135deg, rgb(255 255 255 / 4%) 25%, transparent 25%) 0 0 / 34px 34px,
+    linear-gradient(315deg, rgb(255 255 255 / 4%) 25%, transparent 25%) 0 0 / 34px 34px,
+    var(--paper);
+}
+
+.brand-mark {
+  border-color: #f05b50;
+  background: #792e35;
+  color: #ffd166;
+}
+
+.brand-light,
+.privacy-note {
+  color: #a0decf;
+}
+
+.privacy-note span,
+.warning-light {
+  animation: none;
+  background: #ffd166;
+  box-shadow: 0 0 12px rgb(255 209 102 / 75%);
+}
+
+.eyebrow,
+.eyebrow-line,
+.summary-label,
+.tiny-note span,
+.history-icon,
+.history-amount {
+  color: #ffd166;
+}
+
+.eyebrow-line {
+  background: #ffd166;
+}
+
+.intro-copy,
+.summary-foot,
+.panel-heading p,
+.history-note,
+.footer,
+.tiny-note {
+  color: #cae7dc;
+}
+
+h1 span {
+  color: #ff745f;
+}
+
+.clock-face {
+  border-color: #ff7461;
+  background:
+    radial-gradient(circle, #0d6961 0 61%, transparent 62%),
+    repeating-conic-gradient(from -1deg, #ffd166 0deg 1deg, transparent 1deg 30deg);
+  box-shadow:
+    0 0 0 7px rgb(255 209 102 / 8%),
+    0 0 38px rgb(240 91 80 / 28%),
+    inset 0 0 24px rgb(0 0 0 / 35%);
+}
+
+.clock-face::before { border-color: rgb(255 116 97 / 44%); }
+.clock-face::after { border-color: rgb(255 244 223 / 18%); }
+.clock-motif figcaption { color: #ffd166; }
+
+.summary-card,
+.panel {
+  border-color: #438f82;
+  background: rgb(11 98 90 / 94%);
+}
+
+.current-card {
+  border-color: #ff7163;
+  background:
+    linear-gradient(118deg, rgb(211 73 78 / 96%), rgb(137 48 58 / 96%)),
+    #893a3a;
+}
+
+.current-card .summary-label,
+.current-card .summary-foot {
+  color: #fff2c8;
+}
+
+.live-dot {
+  background: #ffd166;
+  box-shadow: 0 0 9px rgb(255 209 102 / 85%);
+}
+
+.card-decoration { color: rgb(255 244 196 / 12%); }
+
+.step-number,
+.history-date-icon {
+  border-color: #72b6a4;
+  background: #175f56;
+  color: #ffd166;
+}
+
+.price-input-wrap,
+#entry-date {
+  border-color: #62a997;
+  background: #07443f;
+  color: #fff8dc;
+}
+
+.submit-button {
+  border-color: #ff9b73;
+  background: #f05b50;
+  color: #fff7d6;
+}
+
+.submit-button:hover { background: #ff7664; }
+
+.history-heading,
+.history-row {
+  border-color: rgb(202 231 220 / 24%);
+}
+
+.history-date,
+.empty-state p {
+  color: #fff8dc;
+}
+
+.history-amount { color: #ffd166; }
+
+.delete-entry:hover {
+  background: #713139;
+  color: #fff8dc;
+}
+
+.empty-icon {
+  border-color: #f05b50;
+  color: #ffd166;
+}
+
+.footer { border-color: #438f82; }
+
 .clock-easter-egg {
   display: inline-block;
   border-radius: 50%;
@@ -13,7 +163,7 @@
 }
 
 .clock-easter-egg:focus-visible {
-  outline: 2px solid var(--amber);
+  outline: 2px solid #ffd166;
   outline-offset: 8px;
 }
 
@@ -26,7 +176,7 @@
 
 .clock-motif figcaption a:hover,
 .clock-motif figcaption a:focus-visible {
-  color: #fff4df;
+  color: #fff8dc;
 }
 
 @media (prefers-reduced-motion: reduce) {
