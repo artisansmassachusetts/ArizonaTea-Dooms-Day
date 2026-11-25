@@ -158,7 +158,8 @@ priceForm.addEventListener("submit", (event) => {
   } catch {
     message.textContent = "Could not save this sighting. Please check your browser storage and try again.";
   }
-  // =====================================
+  });
+// =====================================
 // TIMELINE BREACH EVENT
 // Every 99 seconds the alternate
 // timeline leaks into the main page.
@@ -268,4 +269,3 @@ setInterval(
   timelineBreach,
   99000
 );
-});
