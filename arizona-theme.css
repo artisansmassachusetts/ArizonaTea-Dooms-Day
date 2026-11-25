@@ -160,6 +160,13 @@ h1 span {
     transform 250ms ease;
     position: relative;
 }
+.timeline-breach .clock-whisper {
+  display: block;
+
+  animation:
+    wonderland-float 1.2s
+    ease-in-out infinite;
+}
 .clock-whisper {
 
   display: none;
