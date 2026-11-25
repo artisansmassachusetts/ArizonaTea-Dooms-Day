@@ -1,0 +1,147 @@
+ :root {
+  color-scheme: dark;
+  --ink: #fff4df;
+  --muted: #b6d3c9;
+  --red: #f05b50;
+  --red-dark: #c83e49;
+  --paper: #073c3b;
+  --panel: #0c5350;
+  --line: #287c73;
+  --amber: #ffd166;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgb(31 190 169 / 24%), transparent 34rem),
+    radial-gradient(ellipse at 88% 20%, rgb(240 91 80 / 23%), transparent 30rem),
+    radial-gradient(ellipse at 55% 100%, rgb(255 209 102 / 13%), transparent 38rem),
+    linear-gradient(135deg, rgb(255 255 255 / 3%) 25%, transparent 25%) 0 0 / 34px 34px,
+    linear-gradient(315deg, rgb(255 255 255 / 3%) 25%, transparent 25%) 0 0 / 34px 34px,
+    var(--paper);
+}
+
+.brand-mark {
+  border-color: #f05b50;
+  background: #6b292c;
+  color: #ffd166;
+}
+
+.brand-light {
+  color: #83d8c8;
+}
+
+.privacy-note,
+.intro-copy,
+.summary-foot,
+.panel-heading p,
+.history-note,
+.footer,
+.tiny-note {
+  color: #b6d3c9;
+}
+
+h1 span {
+  color: #ff7461;
+}
+
+.clock-face {
+  border-color: #ff7461;
+  background:
+    radial-gradient(circle, #0b514d 0 61%, transparent 62%),
+    repeating-conic-gradient(from -1deg, #ffd166 0deg 1deg, transparent 1deg 30deg);
+  box-shadow:
+    0 0 0 7px rgb(255 209 102 / 8%),
+    0 0 38px rgb(240 91 80 / 25%),
+    inset 0 0 24px rgb(0 0 0 / 45%);
+}
+
+.clock-face::before {
+  border-color: rgb(255 116 97 / 38%);
+}
+
+.clock-face::after {
+  border-color: rgb(255 244 223 / 15%);
+}
+
+.clock-motif figcaption {
+  color: #ffd166;
+}
+
+.warning-light,
+.privacy-note span {
+  animation: none;
+  box-shadow: 0 0 10px rgb(240 91 80 / 60%);
+}
+
+.current-card {
+  border-color: #f05b50;
+  background:
+    linear-gradient(118deg, rgb(200 62 73 / 90%), rgb(120 44 49 / 96%)),
+    #782c31;
+}
+
+.summary-card,
+.panel {
+  border-color: #287c73;
+  background-color: rgb(8 70 66 / 94%);
+}
+
+.current-card .summary-foot {
+  color: #ffe0bd;
+}
+
+.step-number,
+.history-date-icon {
+  border-color: #528b78;
+  background: #124e49;
+  color: #ffd166;
+}
+
+.price-input-wrap,
+#entry-date {
+  border-color: #39877b;
+  background: #073c3b;
+  color: #fff4df;
+}
+
+.submit-button {
+  border-color: #ff8971;
+  background: #f05b50;
+  color: #241a18;
+}
+
+.submit-button:hover {
+  background: #ff7664;
+}
+
+.history-heading,
+.history-row {
+  border-color: rgb(182 211 201 / 20%);
+}
+
+.history-amount,
+.history-icon,
+.tiny-note span {
+  color: #ffd166;
+}
+
+.delete-entry:hover {
+  background: #713139;
+  color: #fff4df;
+}
+
+.empty-icon {
+  border-color: #f05b50;
+  color: #ffd166;
+}
+
+.footer {
+  border-color: #287c73;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .warning-light,
+  .privacy-note span {
+    animation: none;
+  }
+}

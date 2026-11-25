@@ -1,9 +1,9 @@
 const STORAGE_KEY = "arizona-watch-prices";
 const priceForm = document.querySelector("#price-form");
-const priceInput = document.querySelector("#price");
 const dateInput = document.querySelector("#entry-date");
 const message = document.querySelector("#form-message");
 const historyList = document.querySelector("#history-list");
+const FIXED_PRICE = 0.99;
 
 const localToday = () => {
   const today = new Date();
@@ -36,15 +36,15 @@ function loadEntries() {
     entries.some(
       (entry) =>
         typeof entry.id !== "string" ||
-        typeof entry.price !== "number" ||
-        !Number.isFinite(entry.price) ||
         typeof entry.date !== "string" ||
         !/^\d{4}-\d{2}-\d{2}$/.test(entry.date),
     )
   ) {
-    throw new Error("Saved price history is not valid.");
+    throw new Error("Saved sighting history is not valid.");
   }
-  return entries;
+
+  // Keep existing local dates, but every sighting represents the fixed 99¢ price.
+  return entries.map(({ id, date }) => ({ id, date, price: FIXED_PRICE }));
 }
 
 function saveEntries(entries) {
@@ -59,55 +59,28 @@ function render(entries) {
         b.entry.date.localeCompare(a.entry.date) || b.index - a.index,
     )
     .map(({ entry }) => entry);
-  const chronological = entries
-    .map((entry, index) => ({ entry, index }))
-    .sort(
-      (a, b) =>
-        a.entry.date.localeCompare(b.entry.date) || a.index - b.index,
-    )
-    .map(({ entry }) => entry);
 
   dateInput.value ||= localToday();
   document.querySelector("#entry-count").textContent =
-    entries.length === 1 ? "1 price in your log" : `${entries.length} prices in your log`;
+    entries.length === 1 ? "1 sighting in your log" : `${entries.length} sightings in your log`;
 
-  const latest = sortedEntries[0];
-  const latestPrice = document.querySelector("#latest-price");
-  const latestDate = document.querySelector("#latest-date");
-  const lowestPrice = document.querySelector("#lowest-price");
-  const lowestDate = document.querySelector("#lowest-date");
-  const priceChange = document.querySelector("#price-change");
-  const changeCaption = document.querySelector("#change-caption");
+  // This is a fixed-price tribute tracker, so the displayed price and change never fluctuate.
+  document.querySelector("#latest-price").textContent = formatPrice(FIXED_PRICE);
+  document.querySelector("#latest-date").textContent = "The legendary price. Still standing.";
+  document.querySelector("#lowest-price").textContent = formatPrice(FIXED_PRICE);
+  document.querySelector("#lowest-date").textContent = "The floor is the floor.";
+  document.querySelector("#price-change").textContent = formatPrice(0);
+  document.querySelector("#change-caption").textContent = "Clock status: permanently frozen";
 
-  if (!latest) {
-    latestPrice.textContent = "—";
-    latestDate.textContent = "Waiting for your first entry";
-    lowestPrice.textContent = "—";
-    lowestDate.textContent = "Your best find so far";
-    priceChange.textContent = "—";
-    changeCaption.textContent = "From your first entry";
+  if (!sortedEntries.length) {
     historyList.innerHTML = `
       <div class="empty-state">
         <span class="empty-icon" aria-hidden="true">＋</span>
-        <p>Your first price goes here.</p>
-        <span>Log a bottle or can to get started.</span>
+        <p>Your first sighting goes here.</p>
+        <span>Log a date to start your 99¢ roll call.</span>
       </div>`;
     return;
   }
-
-  const lowest = entries.reduce((minimum, entry) =>
-    entry.price < minimum.price ? entry : minimum,
-  );
-  const first = chronological[0];
-  const change = latest.price - first.price;
-
-  latestPrice.textContent = formatPrice(latest.price);
-  latestDate.textContent = `Recorded ${formatDate(latest.date)}`;
-  lowestPrice.textContent = formatPrice(lowest.price);
-  lowestDate.textContent = `On ${formatDate(lowest.date)}`;
-  priceChange.textContent = `${change > 0 ? "+" : ""}${formatPrice(change)}`;
-  changeCaption.textContent =
-    entries.length > 1 ? `Since ${formatDate(first.date)}` : "Need another entry to compare";
 
   historyList.replaceChildren(
     ...sortedEntries.map((entry) => {
@@ -128,17 +101,17 @@ function render(entries) {
 
       const note = document.createElement("div");
       note.className = "history-note";
-      note.textContent = "Arizona iced tea";
+      note.textContent = "Arizona iced tea · legendary 99¢";
 
       const amount = document.createElement("span");
       amount.className = "history-amount";
-      amount.textContent = formatPrice(entry.price);
+      amount.textContent = formatPrice(FIXED_PRICE);
 
       const remove = document.createElement("button");
       remove.className = "delete-entry";
       remove.type = "button";
       remove.textContent = "×";
-      remove.setAttribute("aria-label", `Delete price from ${formatDate(entry.date)}`);
+      remove.setAttribute("aria-label", `Delete sighting from ${formatDate(entry.date)}`);
       remove.addEventListener("click", () => {
         const updated = entries.filter((item) => item.id !== entry.id);
         try {
@@ -146,7 +119,7 @@ function render(entries) {
           message.textContent = "";
           render(updated);
         } catch {
-          message.textContent = "Could not update saved prices. Please try again.";
+          message.textContent = "Could not update saved sightings. Please try again.";
         }
       });
 
@@ -162,28 +135,27 @@ dateInput.value = localToday();
 try {
   render(loadEntries());
 } catch {
-  message.textContent = "Could not load saved prices. Your browser storage may be unavailable.";
+  message.textContent = "Could not load saved sightings. Your browser storage may be unavailable.";
 }
 
 priceForm.addEventListener("submit", (event) => {
   event.preventDefault();
   message.textContent = "";
 
-  const price = Number(priceInput.value);
   const date = dateInput.value;
-  if (!Number.isFinite(price) || price < 0.01 || price > 9999.99 || !date) {
-    message.textContent = "Enter a price between $0.01 and $9,999.99, and choose a date.";
+  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    message.textContent = "Choose a valid date for your sighting.";
     return;
   }
 
   try {
     const entries = loadEntries();
-    entries.push({ id: crypto.randomUUID(), price, date });
+    entries.push({ id: crypto.randomUUID(), price: FIXED_PRICE, date });
     saveEntries(entries);
     priceForm.reset();
     dateInput.value = localToday();
     render(entries);
   } catch {
-    message.textContent = "Could not save this price. Please check your browser storage and try again.";
+    message.textContent = "Could not save this sighting. Please check your browser storage and try again.";
   }
 });
