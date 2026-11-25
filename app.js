@@ -174,6 +174,9 @@ const latestPrice =
 const latestDate =
   document.querySelector("#latest-date");
 
+const whisper =
+  document.querySelector("#clock-whisper");
+
 function timelineBreach() {
 
   if (
@@ -196,7 +199,24 @@ function timelineBreach() {
   document.body.classList.add(
     "timeline-breach"
   );
+const whispers = [
+  "click me...",
+  "don't click me...",
+  "one minute remains...",
+  "it's almost midnight...",
+  "12:01",
+  "too late..."
+];
 
+if (whisper) {
+  whisper.textContent =
+    whispers[
+      Math.floor(
+        Math.random() *
+        whispers.length
+      )
+    ];
+}
   const glitchTimes = [
     "11:59",
     "12:00",
