@@ -161,8 +161,7 @@ priceForm.addEventListener("submit", (event) => {
   });
 // =====================================
 // TIMELINE BREACH EVENT
-// Every 99 seconds the alternate
-// timeline leaks into the main page.
+// Alternate timeline leaks into page.
 // =====================================
 
 const clockTime =
@@ -176,6 +175,94 @@ const latestDate =
 
 const whisper =
   document.querySelector("#clock-whisper");
+
+let audioUnlocked = false;
+
+document.addEventListener(
+  "click",
+  () => {
+    audioUnlocked = true;
+  },
+  { once: true }
+);
+
+function playTimelineBreachSound() {
+
+  if (!audioUnlocked) {
+    return;
+  }
+
+  const ctx =
+    new (
+      window.AudioContext ||
+      window.webkitAudioContext
+    )();
+
+  const tick =
+    ctx.createOscillator();
+
+  const tickGain =
+    ctx.createGain();
+
+  tick.type = "square";
+  tick.frequency.value = 900;
+  tickGain.gain.value = 0.02;
+
+  tick.connect(tickGain);
+  tickGain.connect(
+    ctx.destination
+  );
+
+  tick.start();
+  tick.stop(
+    ctx.currentTime + 0.05
+  );
+
+  const glitch =
+    ctx.createOscillator();
+
+  const glitchGain =
+    ctx.createGain();
+
+  glitch.type = "sawtooth";
+
+  glitch.frequency.setValueAtTime(
+    400,
+    ctx.currentTime + 0.08
+  );
+
+  glitch.frequency.exponentialRampToValueAtTime(
+    90,
+    ctx.currentTime + 0.35
+  );
+
+  glitchGain.gain.setValueAtTime(
+    0.03,
+    ctx.currentTime + 0.08
+  );
+
+  glitchGain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    ctx.currentTime + 0.35
+  );
+
+  glitch.connect(
+    glitchGain
+  );
+
+  glitchGain.connect(
+    ctx.destination
+  );
+
+  glitch.start(
+    ctx.currentTime + 0.08
+  );
+
+  glitch.stop(
+    ctx.currentTime + 0.35
+  );
+
+}
 
 function timelineBreach() {
 
@@ -199,27 +286,33 @@ function timelineBreach() {
   document.body.classList.add(
     "timeline-breach"
   );
-const whispers = [
-  "click me...",
-  "don't click me...",
-  "one minute remains...",
-  "it's almost midnight...",
-  "12:01",
-  "too late..."
-];
 
-if (whisper) {
-  whisper.textContent =
-    whispers[
-      Math.floor(
-        Math.random() *
-        whispers.length
-      )
-    ];
-}
+  playTimelineBreachSound();
+
+  const whispers = [
+    "click me...",
+    "don't click me...",
+    "one minute remains...",
+    "it's almost midnight...",
+    "12:01",
+    "too late..."
+  ];
+
+  if (whisper) {
+
+    whisper.textContent =
+      whispers[
+        Math.floor(
+          Math.random() *
+          whispers.length
+        )
+      ];
+
+  }
+
   const glitchTimes = [
-    "11:59",
     "12:00",
+    "12:01",
     "12:01",
     "11:60",
     "??:??",
@@ -234,14 +327,14 @@ if (whisper) {
       )
     ];
 
-const fakePrices = [
-  "$42,183.91",
-  "$88,888.88",
-  "$999,999.99",
-  "$4,285,991.17",
-  "$77,000,000.00",
-  "$∞"
-];
+  const fakePrices = [
+    "$42,183.91",
+    "$88,888.88",
+    "$999,999.99",
+    "$4,285,991.17",
+    "$77,000,000.00",
+    "$∞"
+  ];
 
   latestPrice.textContent =
     fakePrices[
@@ -251,17 +344,17 @@ const fakePrices = [
       )
     ];
 
- const breachMessages = [
-  "TIMELINE BREACH DETECTED",
-  "TIK TOK TIK TOK",
-  "CLICK THE CLOCK",
-  "UNAUTHORIZED TIMELINE",
-  "PRICE CONTAINMENT FAILURE",
-  "11:59 WATCHES YOU",
-  "REALITY DESYNC DETECTED",
-  "I HEARD YOUR MOM CALLING YOU"
-];
-  
+  const breachMessages = [
+    "TIMELINE BREACH DETECTED",
+    "TIK TOK TIK TOK",
+    "CLICK THE CLOCK",
+    "UNAUTHORIZED TIMELINE",
+    "THE PRICE MOVED",
+    "11:59 WATCHES YOU",
+    "REALITY DESYNC DETECTED",
+    "I HEARD YOUR MOM CALLING YOU"
+  ];
+
   latestDate.textContent =
     breachMessages[
       Math.floor(
@@ -286,13 +379,23 @@ const fakePrices = [
       originalDate;
 
   }, 3000);
+
 }
 
-setTimeout(
-  timelineBreach,
-  10000
+// First breach shortly after load
+window.addEventListener(
+  "load",
+  () => {
+
+    setTimeout(
+      timelineBreach,
+      750
+    );
+
+  }
 );
 
+// Repeating breaches
 setInterval(
   timelineBreach,
   10000
