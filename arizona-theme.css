@@ -359,7 +359,20 @@ h1 span {
   box-shadow:
     0 0 18px rgba(255, 51, 79, .95);
 }
+.timeline-breach .clock-whisper {
 
+  display: block;
+
+  color: #ffd166;
+
+  animation:
+    wonderland-float 1.2s
+    ease-in-out infinite;
+
+  text-shadow:
+    0 0 15px rgba(255,209,102,.9);
+
+}
 @keyframes breach-flicker {
 
   0%, 100% {
