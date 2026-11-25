@@ -164,18 +164,20 @@ h1 span {
 
   position: absolute;
 
-  top: -15px;
-  right: -60px;
+  top: -35px;
+  left: 50%;
+
+  transform:
+    translateX(-50%)
+    rotate(-12deg);
 
   color: #ffd166;
 
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 
   font-family: "Caveat", cursive;
 
   font-style: italic;
-
-  transform: rotate(-12deg);
 
   text-shadow:
     0 0 8px rgba(255,209,102,.5);
@@ -185,6 +187,8 @@ h1 span {
     ease-in-out infinite;
 
   pointer-events: none;
+
+  white-space: nowrap;
 }
 @keyframes wonderland-float {
 
