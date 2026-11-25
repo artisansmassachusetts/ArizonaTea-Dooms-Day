@@ -249,7 +249,21 @@ h1 span {
 
 .timeline-breach {
   animation:
-    breach-flicker 0.15s linear 10;
+    breach-flicker 0.12s linear 25;
+}
+
+.timeline-breach .clock-face {
+  border-color: #ff334f;
+
+  box-shadow:
+    0 0 25px rgba(255, 51, 79, .7),
+    0 0 80px rgba(255, 51, 79, .5),
+    inset 0 0 24px rgba(255, 51, 79, .2);
+}
+
+.timeline-breach {
+  animation:
+    breach-flicker 0.12s linear 25;
 }
 
 .timeline-breach .clock-face {
@@ -266,6 +280,24 @@ h1 span {
 
   text-shadow:
     0 0 12px rgba(255, 51, 79, .85);
+}
+
+.timeline-breach .clock-hand-hour {
+  transform:
+    translateX(-50%)
+    rotate(40deg);
+
+  transition:
+    transform 0.2s ease;
+}
+
+.timeline-breach .clock-hand-minute {
+  transform:
+    translateX(-50%)
+    rotate(250deg);
+
+  transition:
+    transform 0.2s ease;
 }
 
 .timeline-breach #latest-price {
