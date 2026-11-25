@@ -158,4 +158,42 @@ priceForm.addEventListener("submit", (event) => {
   } catch {
     message.textContent = "Could not save this sighting. Please check your browser storage and try again.";
   }
+  const clockTime =
+  document.querySelector(".clock-time");
+
+const latestPrice =
+  document.querySelector("#latest-price");
+
+function timelineBreach() {
+
+  if (!clockTime || !latestPrice) {
+    return;
+  }
+
+  document.body.classList.add(
+    "timeline-breach"
+  );
+
+  clockTime.textContent = "11:59";
+
+  latestPrice.textContent =
+    "$42,183.91";
+
+  setTimeout(() => {
+
+    document.body.classList.remove(
+      "timeline-breach"
+    );
+
+    clockTime.textContent = "11:58";
+
+    latestPrice.textContent = "$0.99";
+
+  }, 2500);
+}
+
+setInterval(
+  timelineBreach,
+  99000
+);
 });
