@@ -162,6 +162,8 @@ h1 span {
 }
 .clock-whisper {
 
+  display: none;
+
   position: absolute;
 
   top: -35px;
@@ -180,15 +182,13 @@ h1 span {
   font-style: italic;
 
   text-shadow:
-    0 0 8px rgba(255,209,102,.5);
+    0 0 12px rgba(255,209,102,.7);
 
-  animation:
-    wonderland-float 4s
-    ease-in-out infinite;
+  white-space: nowrap;
 
   pointer-events: none;
 
-  white-space: nowrap;
+  z-index: 100;
 }
 @keyframes wonderland-float {
 
