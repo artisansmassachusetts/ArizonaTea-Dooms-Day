@@ -13,7 +13,7 @@ const storyElement =
 const achievementsElement =
   document.querySelector("#achievements");
 
-let price = 99;
+let price = 1.00;
 
 const headlines = [
   "BREAKING: Arizona Tea surpasses gold.",
@@ -55,35 +55,35 @@ const stories = [
 
 const achievementData = [
   {
-    amount: 100,
+    amount: 10,
     title: "☕ First Price Movement"
   },
   {
+    amount: 100,
+    title: "📈 Double Digits"
+  },
+  {
     amount: 1000,
-    title: "📈 Four Figures"
+    title: "💸 Four Figure Beverage"
   },
   {
     amount: 10000,
-    title: "💸 Beverage Speculation"
-  },
-  {
-    amount: 100000,
     title: "🏦 Institutional Tea"
   },
   {
-    amount: 1000000,
-    title: "🚀 Million Dollar Can"
-  },
-  {
-    amount: 10000000,
+    amount: 100000,
     title: "🌎 Global Commodity"
   },
   {
-    amount: 100000000,
+    amount: 1000000,
+    title: "🚀 Seven Figure Sip"
+  },
+  {
+    amount: 10000000,
     title: "🪐 Interplanetary Asset"
   },
   {
-    amount: 1000000000,
+    amount: 100000000,
     title: "👑 Beverage Royalty"
   },
   {
