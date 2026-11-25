@@ -1,259 +1,414 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A tiny, fictional Arizona tea price apocalypse. For fun; not a live price report." />
-  <meta name="theme-color" content="#08070b" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta
+    name="description"
+    content="A tiny fictional Arizona Tea apocalypse hidden behind a frozen clock."
+  >
+
   <title>Arizona Watch — After Midnight</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="midnight.css" />
-
-  <style>
-    .shutdown .price-display {
-      color: #7eff9b;
-      text-shadow: 0 0 35px rgba(126,255,155,.8);
-    }
-
-    .shutdown-banner {
-      height: 24px;
-      color: #7eff9b;
-      font-family: "Space Grotesk", sans-serif;
-      letter-spacing: 3px;
-      font-size: 12px;
-    }
-  </style>
+  <link rel="stylesheet" href="midnight.css">
 </head>
 <body>
 
 <main class="nightmare">
+
   <p class="eyebrow">
     ARIZONA WATCH // UNAUTHORIZED TIMELINE
   </p>
 
-  <div class="glitch-mark" aria-hidden="true">
+  <div class="glitch-mark">
     A?
   </div>
 
   <h1>
-    It’s 12:01.<br />
+    It's 12:01.<br>
     <span>The price keeps climbing.</span>
   </h1>
 
-  <p class="warning">
+  <p class="warning" id="warning">
     The impossible has happened.
   </p>
 
   <div
-    id="chaos-price"
     class="price-display"
-    aria-label="Arizona Tea apocalypse price"
+    id="chaos-price"
   >
     $0.99
   </div>
 
-  <div id="shutdown-banner" class="shutdown-banner"></div>
-
-  <p class="story">
+  <p class="story" id="story">
     The clock moved one minute. Somewhere, a tiny tea can shed a single condensation tear.
   </p>
+
+  <div class="achievement-box">
+    <div class="achievement-title">
+      ACHIEVEMENTS
+    </div>
+
+    <div
+      id="achievements"
+      class="achievement-list"
+    ></div>
+  </div>
+
+  <div class="news-box">
+    <div class="news-title">
+      BREAKING NEWS
+    </div>
+
+    <div
+      id="news-ticker"
+      class="news-ticker"
+    >
+      Monitoring beverage markets...
+    </div>
+  </div>
+
+  <div class="log-box">
+    <div class="log-title">
+      CONTAINMENT LOG
+    </div>
+
+    <div
+      id="log-console"
+      class="log-console"
+    ></div>
+  </div>
 
   <p class="disclaimer">
     THIS IS A SILLY FICTIONAL EASTER EGG.
     REAL PRICES MAY VARY.
-    IF A CONTAINMENT CODE EXISTS, IT HAS BEEN LOST TO TIME.
+    DO NOT ATTEMPT INTERDIMENSIONAL TEA ARBITRAGE.
   </p>
 
-  <a class="escape-link" href="index.html">
+  <a
+    class="escape-link"
+    href="index.html"
+  >
     ↶ Escape back to the 99¢ timeline
   </a>
 
-  <span class="scanline" aria-hidden="true"></span>
 </main>
 
 <script>
+
 const priceEl = document.getElementById("chaos-price");
-const warning = document.querySelector(".warning");
-const story = document.querySelector(".story");
-const banner = document.getElementById("shutdown-banner");
+const warningEl = document.getElementById("warning");
+const storyEl = document.getElementById("story");
+const achievementsEl = document.getElementById("achievements");
+const newsEl = document.getElementById("news-ticker");
+const logEl = document.getElementById("log-console");
 
 let cents = 99n;
-let intervalId;
-let shutdownActive = false;
+let halted = false;
 
-const SECRET_CODE = "99CENTS";
-let typed = "";
+const unlocked = new Set();
 
-function updateLore(dollars) {
+const achievements = [
+  [1n,"First Dollar"],
+  [10n,"Double Digits"],
+  [100n,"Three Figures"],
+  [1000n,"Economic Menace"],
+  [10000n,"National Emergency"],
+  [1000000n,"Asset Class"],
+  [1000000000n,"Living Myth"],
+  [1000000000000n,"Reality Breach"],
+  [1000000000000000n,"Galactic Commodity"],
+  [1000000000000000000n,"Universal Currency"]
+];
 
-  if (dollars < 2n) {
-    warning.textContent =
-      "The impossible has happened.";
+const newsItems = [
+  "BREAKING: Arizona surpasses gold.",
+  "BREAKING: Tea futures reach record highs.",
+  "BREAKING: Congress schedules emergency hydration hearing.",
+  "BREAKING: Federal Tea Reserve convenes.",
+  "BREAKING: Beverage economists concerned.",
+  "BREAKING: Arizona adopted by Moon colony.",
+  "BREAKING: Martian banks suspend trading.",
+  "BREAKING: Tea-backed securities dominate markets.",
+  "BREAKING: Price charts now vertical."
+];
 
-    story.textContent =
-      "The clock moved one minute. Somewhere, a tiny tea can shed a single condensation tear.";
-  }
+const logs = [
+  "LOG-084: Public concern remains manageable.",
+  "LOG-132: Price exceeds luxury vehicle values.",
+  "LOG-201: Beverage economists deployed.",
+  "LOG-311: Federal Tea Reserve activated.",
+  "LOG-502: Multiple markets halted.",
+  "LOG-681: Moon colony requests assistance.",
+  "LOG-902: Timeline integrity unstable.",
+  "LOG-999: Reality classified as compromised."
+];
 
-  else if (dollars < 10n) {
-    warning.textContent =
-      "Analysts are monitoring the situation.";
+let codeBuffer = "";
 
-    story.textContent =
-      "Customers report mild anxiety at checkout.";
-  }
+function unlock(name) {
 
-  else if (dollars < 100n) {
-    warning.textContent =
-      "The Arizona Council has convened.";
+  if(unlocked.has(name)) return;
 
-    story.textContent =
-      "Scholars debate whether 99¢ was ever real.";
-  }
+  unlocked.add(name);
 
-  else if (dollars < 1000n) {
-    warning.textContent =
-      "National concern is rising.";
+  const badge = document.createElement("span");
+  badge.className = "badge";
+  badge.textContent = "✅ " + name;
 
-    story.textContent =
-      "People speak in hushed tones of affordable beverages.";
-  }
+  achievementsEl.appendChild(badge);
 
-  else if (dollars < 10000n) {
-    warning.textContent =
-      "Economic stability is deteriorating.";
+  addLog("ACHIEVEMENT UNLOCKED: " + name);
+}
 
-    story.textContent =
-      "Luxury cars now cost less than a can of Arizona.";
-  }
+function addLog(text){
 
-  else if (dollars < 100000n) {
-    warning.textContent =
-      "THIS IS NOT A DRILL.";
+  const row = document.createElement("div");
 
-    story.textContent =
-      "Entire retirement accounts are being converted into tea futures.";
-  }
+  row.textContent =
+    "[" + new Date().toLocaleTimeString() + "] " + text;
 
-  else if (dollars < 1000000n) {
-    warning.textContent =
-      "The tea has become an asset class.";
+  logEl.prepend(row);
 
-    story.textContent =
-      "Universities offer doctorates in Arizona valuation.";
-  }
-
-  else if (dollars < 10000000n) {
-    warning.textContent =
-      "Governments are negotiating.";
-
-    story.textContent =
-      "Several nations now peg their currencies to Arizona.";
-  }
-
-  else if (dollars < 1000000000n) {
-    warning.textContent =
-      "Humanity remembers 99¢ only in myths.";
-
-    story.textContent =
-      "Children gather around campfires to hear stories of the old price.";
-  }
-
-  else if (dollars < 1000000000000n) {
-    warning.textContent =
-      "ATTENTION: PRICE ANOMALY DETECTED";
-
-    story.textContent =
-      "Physicists cannot explain the continued increase.";
-  }
-
-  else if (dollars < 1000000000000000n) {
-    warning.textContent =
-      "CONTAINMENT TEAMS HAVE BEEN DISPATCHED";
-
-    story.textContent =
-      "Rumors spread of an emergency shutdown protocol.";
-  }
-
-  else if (dollars < 1000000000000000000n) {
-    warning.textContent =
-      "EMERGENCY SHUTDOWN CODE REQUIRED";
-
-    story.textContent =
-      "Ancient records mention the phrase: 99CENTS.";
-  }
-
-  else {
-    warning.textContent =
-      "PRICE CONTAINMENT FAILURE";
-
-    story.textContent =
-      "The observable universe can no longer afford a single can.";
+  while(logEl.children.length > 20){
+    logEl.removeChild(logEl.lastChild);
   }
 }
 
-function updatePrice() {
-  if (shutdownActive) return;
+function updateLore(dollars){
+
+  if(dollars < 10n){
+    warningEl.textContent =
+      "Analysts are monitoring the situation.";
+
+    storyEl.textContent =
+      "Customers report mild confusion at checkout.";
+  }
+
+  else if(dollars < 100n){
+    warningEl.textContent =
+      "The Arizona Council has convened.";
+
+    storyEl.textContent =
+      "The 99¢ era is increasingly difficult to verify.";
+  }
+
+  else if(dollars < 1000n){
+    warningEl.textContent =
+      "National concern is rising.";
+
+    storyEl.textContent =
+      "People whisper about affordable beverages.";
+  }
+
+  else if(dollars < 10000n){
+    warningEl.textContent =
+      "Economic stability is deteriorating.";
+
+    storyEl.textContent =
+      "Luxury cars now cost less than Arizona Tea.";
+  }
+
+  else if(dollars < 1000000n){
+    warningEl.textContent =
+      "THIS IS NOT A DRILL.";
+
+    storyEl.textContent =
+      "Investment portfolios are becoming beverage-heavy.";
+  }
+
+  else if(dollars < 1000000000n){
+    warningEl.textContent =
+      "The tea has become an asset class.";
+
+    storyEl.textContent =
+      "Universities now offer Arizona valuation degrees.";
+  }
+
+  else if(dollars < 1000000000000n){
+    warningEl.textContent =
+      "Reality is destabilizing.";
+
+    storyEl.textContent =
+      "Humanity remembers 99¢ only through legends.";
+  }
+
+  else if(dollars < 1000000000000000n){
+    warningEl.textContent =
+      "CONTAINMENT TEAMS DISPATCHED";
+
+    storyEl.textContent =
+      "Ancient records mention a forgotten shutdown code.";
+  }
+
+  else if(dollars < 1000000000000000000n){
+    warningEl.textContent =
+      "EMERGENCY SHUTDOWN CODE REQUIRED";
+
+    storyEl.textContent =
+      "The phrase 99CENTS appears in recovered archives.";
+  }
+
+  else{
+    warningEl.textContent =
+      "PRICE CONTAINMENT FAILURE";
+
+    storyEl.textContent =
+      "The tea has become a fundamental force of nature.";
+  }
+}
+
+function formatPrice() {
 
   const dollars = cents / 100n;
-  const remainder = (cents % 100n)
-    .toString()
-    .padStart(2, "0");
 
-  priceEl.textContent =
-    "$" + dollars.toLocaleString() + "." + remainder;
+  const remainder =
+    (cents % 100n)
+     .toString()
+     .padStart(2,"0");
+
+  return "$" +
+    dollars.toLocaleString() +
+    "." +
+    remainder;
+}
+
+function updatePrice(){
+
+  if(halted) return;
+
+  const dollars = cents / 100n;
+
+  priceEl.textContent = formatPrice();
 
   updateLore(dollars);
+
+  achievements.forEach(([amount,name])=>{
+    if(dollars >= amount){
+      unlock(name);
+    }
+  });
+
+  if(Math.random() < 0.0008){
+
+    const jump =
+      BigInt(Math.floor(Math.random()*10000000)+500000);
+
+    cents += jump * 100n;
+
+    addLog(
+      "TIME ANOMALY DETECTED. +" +
+      jump.toLocaleString()
+    );
+  }
 
   cents += 1n;
 }
 
-function triggerShutdown() {
+function shutdownEnding(){
 
-  shutdownActive = true;
-
-  clearInterval(intervalId);
+  halted = true;
 
   document.body.classList.add("shutdown");
 
-  banner.textContent =
-    "CONTAINMENT PROTOCOL ENGAGED";
-
-  warning.textContent =
+  warningEl.textContent =
     "EMERGENCY CONTAINMENT SUCCESSFUL";
 
-  story.textContent =
-    "Investigators have restored the sacred 99¢ timeline.";
+  storyEl.textContent =
+    "The sacred 99¢ timeline has been restored.";
 
   priceEl.textContent =
     "$0.99";
+
+  addLog("CONTAINMENT ACHIEVED");
 }
 
-document.addEventListener("keydown", (event) => {
+function palmerEnding(){
 
-  if (shutdownActive) return;
+  halted = true;
 
-  typed += event.key.toUpperCase();
+  document.body.classList.add("palmer-ending");
 
-  typed = typed.slice(-SECRET_CODE.length);
+  warningEl.textContent =
+    "ALTERNATE TIMELINE RESTORED";
 
-  if (typed === SECRET_CODE) {
-    triggerShutdown();
+  storyEl.textContent =
+    "Half tea. Half lemonade. Full peace.";
+
+  priceEl.textContent =
+    "$0.99";
+
+  addLog("ARNOLD PALMER PROTOCOL ACTIVATED");
+}
+
+function bigCanEnding(){
+
+  halted = true;
+
+  document.body.classList.add("big-can-ending");
+
+  warningEl.textContent =
+    "THE PROPHECY IS FULFILLED";
+
+  storyEl.textContent =
+    "99¢ FOREVER.";
+
+  priceEl.textContent =
+    "99¢ FOREVER";
+
+  addLog("BIG AZ CAN ENDING TRIGGERED");
+}
+
+document.addEventListener("keydown",(event)=>{
+
+  codeBuffer += event.key.toUpperCase();
+
+  codeBuffer = codeBuffer.slice(-20);
+
+  if(codeBuffer.includes("99CENTS")){
+    shutdownEnding();
+  }
+
+  if(codeBuffer.includes("ARNOLDPALMER")){
+    palmerEnding();
+  }
+
+  if(codeBuffer.includes("BIGAZCAN")){
+    bigCanEnding();
   }
 });
 
-updatePrice();
+setInterval(()=>{
+  newsEl.textContent =
+    newsItems[
+      Math.floor(
+        Math.random() * newsItems.length
+      )
+    ];
+},4000);
 
-intervalId = setInterval(
-  updatePrice,
-  100
-);
+setInterval(()=>{
+  addLog(
+    logs[
+      Math.floor(
+        Math.random() * logs.length
+      )
+    ]
+  );
+},7000);
+
+setInterval(updatePrice,100);
+
+addLog("TIMELINE DIVERGENCE DETECTED");
+addLog("ARIZONA PRICE EVENT ACTIVE");
+
 </script>
 
 </body>
