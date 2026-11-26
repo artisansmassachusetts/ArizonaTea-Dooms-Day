@@ -297,10 +297,20 @@ h1 span {
   background:
     radial-gradient(
       ellipse at center,
-      rgba(255, 51, 79, .12),
+      rgba(255, 51, 79, .15),
       transparent 70%
     ),
     var(--paper);
+
+}
+
+.timeline-breach .clock-motif {
+
+  animation:
+    clock-jump
+    90ms
+    steps(2)
+    infinite;
 
 }
 
@@ -309,15 +319,37 @@ h1 span {
   border-color: #ff334f;
 
   box-shadow:
-    0 0 25px rgba(255, 51, 79, .7),
-    0 0 80px rgba(255, 51, 79, .4),
-    inset 0 0 24px rgba(255, 51, 79, .25);
+    0 0 30px rgba(255,51,79,.7),
+    0 0 100px rgba(255,51,79,.45),
+    inset 0 0 24px rgba(255,51,79,.25);
 
   animation:
-    timeline-warp
-    650ms
-    ease-in-out
+    timeline-chaos
+    120ms
+    steps(2)
     infinite;
+
+}
+
+.timeline-breach .clock-face::before {
+
+  border-color:
+    rgba(0,255,255,.6);
+
+  transform:
+    translate(-12px,-4px);
+
+}
+
+.timeline-breach .clock-face::after {
+
+  border-color:
+    rgba(255,0,50,.6);
+
+  transform:
+    translate(12px,4px);
+
+  opacity: .8;
 
 }
 
@@ -325,21 +357,31 @@ h1 span {
 
   color: #ff334f;
 
+  font-size: 1.25em;
+
+  letter-spacing: 6px;
+
   text-shadow:
-    0 0 12px rgba(255, 51, 79, .85);
+    -2px 0 #00ffff,
+    2px 0 #ff0033,
+    0 0 18px rgba(255,51,79,.9);
 
 }
 
-.clock-hand-hour {
+.timeline-breach .clock-hand-hour {
+
   transform:
     translateX(-50%)
-    rotate(359.5deg);
+    rotate(.5deg);
+
 }
 
-.clock-hand-minute {
+.timeline-breach .clock-hand-minute {
+
   transform:
     translateX(-50%)
-    rotate(354deg);
+    rotate(6deg);
+
 }
 
 .timeline-breach .clock-hand {
@@ -352,97 +394,86 @@ h1 span {
 
 }
 
-.timeline-breach #latest-price {
-
-  color: #ff334f;
-
-  text-shadow:
-    0 0 12px rgba(255, 51, 79, .8),
-    0 0 25px rgba(255, 51, 79, .5);
-
-}
-
-.timeline-breach .summary-card {
-
-  filter:
-    contrast(1.1);
-
-}
-
-.timeline-breach .current-card {
-
-  filter:
-    saturate(1.15)
-    brightness(1.05);
-
-}
-
-.timeline-breach .warning-light {
-
-  box-shadow:
-    0 0 18px rgba(255, 51, 79, .95);
-
-}
-
 .timeline-breach .clock-whisper {
 
   display: block;
 
-  opacity: 0;
-
   color: #ffd166;
 
   animation:
-    whisper-fade .8s forwards,
-    wonderland-float 1.2s ease-in-out infinite;
-
-  text-shadow:
-    0 0 15px rgba(255,209,102,.9);
+    whisper-glitch
+    180ms
+    steps(2)
+    infinite;
 
 }
 
-@keyframes timeline-warp {
+@keyframes timeline-chaos {
 
   0% {
-
     transform:
-      scale(1)
-      rotate(0deg);
-
+      translate(0,0)
+      scale(1);
   }
 
-  25% {
-
+  20% {
     transform:
-      scaleX(1.16)
-      scaleY(.86)
-      rotate(-3deg);
-
+      translate(-10px,4px)
+      scaleX(1.4)
+      scaleY(.6)
+      rotate(-12deg);
   }
 
-  50% {
-
+  40% {
     transform:
-      scale(1.25)
-      rotate(-6deg);
-
+      translate(12px,-8px)
+      scaleX(.6)
+      scaleY(1.5)
+      rotate(16deg);
   }
 
-  75% {
-
+  60% {
     transform:
-      scaleX(.88)
-      scaleY(1.12)
-      rotate(3deg);
+      translate(-7px,-12px)
+      scale(1.3)
+      rotate(-20deg);
+  }
 
+  80% {
+    transform:
+      translate(15px,6px)
+      scale(.8)
+      rotate(11deg);
   }
 
   100% {
-
     transform:
-      scale(1)
-      rotate(0deg);
+      translate(0,0)
+      scale(1);
+  }
 
+}
+
+@keyframes clock-jump {
+
+  0% {
+    transform: translate(0);
+  }
+
+  25% {
+    transform: translate(-8px,3px);
+  }
+
+  50% {
+    transform: translate(7px,-4px);
+  }
+
+  75% {
+    transform: translate(-5px,-6px);
+  }
+
+  100% {
+    transform: translate(0);
   }
 
 }
@@ -450,39 +481,39 @@ h1 span {
 @keyframes hand-glitch {
 
   0% {
-
     filter: none;
-
   }
 
   50% {
-
     transform:
-      translateX(-48%);
-
+      translateX(-46%);
   }
 
   100% {
-
     transform:
       translateX(-50%);
-
   }
 
 }
 
-@keyframes whisper-fade {
+@keyframes whisper-glitch {
 
-  from {
-
-    opacity: 0;
-
+  0% {
+    transform:
+      translateX(-50%)
+      rotate(-12deg);
   }
 
-  to {
+  50% {
+    transform:
+      translateX(-40%)
+      rotate(8deg);
+  }
 
-    opacity: 1;
-
+  100% {
+    transform:
+      translateX(-50%)
+      rotate(-12deg);
   }
 
 }
