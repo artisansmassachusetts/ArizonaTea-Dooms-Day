@@ -1,4 +1,5 @@
 const STORAGE_KEY = "arizona-watch-prices";
+const priceForm = document.querySelector("#price-form");
 const dateInput = document.querySelector("#entry-date");
 const message = document.querySelector("#form-message");
 const historyList = document.querySelector("#history-list");
@@ -131,122 +132,33 @@ function render(entries) {
 
 dateInput.value = localToday();
 
-const lowButton =
-  document.querySelector("#timeline-low");
-
-const normalButton =
-  document.querySelector("#timeline-normal");
-
-const highButton =
-  document.querySelector("#timeline-high");
-
 try {
   render(loadEntries());
 } catch {
-  message.textContent =
-    "Could not load saved sightings. Your browser storage may be unavailable.";
+  message.textContent = "Could not load saved sightings. Your browser storage may be unavailable.";
 }
 
-function saveTimelineSighting() {
+priceForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  message.textContent = "";
 
-  const date =
-    dateInput.value;
-
-  if (
-    !date ||
-    !/^\d{4}-\d{2}-\d{2}$/.test(date)
-  ) {
-
-    message.textContent =
-      "Choose a valid date first.";
-
-    return false;
-
+  const date = dateInput.value;
+  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    message.textContent = "Choose a valid date for your sighting.";
+    return;
   }
 
-  const entries =
-    loadEntries();
-
-  entries.push({
-
-    id:
-      crypto.randomUUID(),
-
-    price:
-      FIXED_PRICE,
-
-    date
-
+  try {
+    const entries = loadEntries();
+    entries.push({ id: crypto.randomUUID(), price: FIXED_PRICE, date });
+    saveEntries(entries);
+    priceForm.reset();
+    dateInput.value = localToday();
+    render(entries);
+  } catch {
+    message.textContent = "Could not save this sighting. Please check your browser storage and try again.";
+  }
   });
-
-  saveEntries(entries);
-
-  render(entries);
-
-  return true;
-
-}
-normalButton?.addEventListener(
-  "click",
-  () => {
-
-    try {
-
-      if (
-        saveTimelineSighting()
-      ) {
-
-        message.textContent =
-          "✅ Timeline verified. Arizona Tea remains 99¢.";
-
-      }
-
-    } catch {
-
-      message.textContent =
-        "Could not save this sighting.";
-
-    }
-
-  }
-);
-lowButton?.addEventListener(
-  "click",
-  () => {
-
-    message.textContent =
-      "😇 Blessed timeline detected. Arizona Tea is 89¢ and society prospers.";
-
-  }
-);
-highButton?.addEventListener(
-  "click",
-  () => {
-
-    message.textContent =
-      "😈 PRICE ANOMALY DETECTED";
-
-    timelineBreach();
-
-    if (latestDate) {
-
-      latestDate.textContent =
-        "OPENING FORBIDDEN TIMELINE";
-
-    }
-
-    setTimeout(
-      () => {
-
-        window.location.href =
-          "midnight.html";
-
-      },
-      1800
-    );
-
-  }
-);
 // =====================================
 // TIMELINE BREACH EVENT
 // Alternate timeline leaks into page.
@@ -469,3 +381,22 @@ function timelineBreach() {
   }, 3000);
 
 }
+
+// First breach shortly after load
+window.addEventListener(
+  "load",
+  () => {
+
+    setTimeout(
+      timelineBreach,
+      750
+    );
+
+  }
+);
+
+// Repeating breaches
+setInterval(
+  timelineBreach,
+  10000
+);
