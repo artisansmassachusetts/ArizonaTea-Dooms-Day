@@ -1,5 +1,4 @@
 const STORAGE_KEY = "arizona-watch-prices";
-const priceForm = document.querySelector("#price-form");
 const dateInput = document.querySelector("#entry-date");
 const message = document.querySelector("#form-message");
 const historyList = document.querySelector("#history-list");
