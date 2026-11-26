@@ -408,7 +408,17 @@ h1 span {
   opacity: .8;
 
 }
+.timeline-options {
 
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  margin-top: 20px;
+
+}
 .timeline-breach .clock-time {
 
   color: #ff334f;
