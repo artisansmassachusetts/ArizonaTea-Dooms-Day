@@ -217,7 +217,7 @@ lowButton?.addEventListener(
   () => {
 
     message.textContent =
-      "😇 Blessed timeline detected. Arizona Tea is somehow cheaper than 99¢.";
+      "😇 Blessed timeline detected. Arizona Tea is 89¢ and society prospers.";
 
   }
 );
@@ -228,16 +228,7 @@ highButton?.addEventListener(
     message.textContent =
       "😈 PRICE ANOMALY DETECTED";
 
-    document.body.classList.add(
-      "timeline-breach"
-    );
-
-    if (clockTime) {
-
-      clockTime.textContent =
-        "12:01";
-
-    }
+    timelineBreach();
 
     if (latestDate) {
 
@@ -245,8 +236,6 @@ highButton?.addEventListener(
         "OPENING FORBIDDEN TIMELINE";
 
     }
-
-    playTimelineBreachSound();
 
     setTimeout(
       () => {
@@ -483,21 +472,3 @@ function timelineBreach() {
 
 }
 
-// First breach shortly after load
-window.addEventListener(
-  "load",
-  () => {
-
-    setTimeout(
-      timelineBreach,
-      750
-    );
-
-  }
-);
-
-// Repeating breaches
-setInterval(
-  timelineBreach,
-  10000
-);
