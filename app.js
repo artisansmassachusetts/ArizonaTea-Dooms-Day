@@ -31,12 +31,12 @@ function loadEntries() {
   const entries = JSON.parse(saved);
   if (
     !Array.isArray(entries) ||
-    entries.some(
-      (entry) =>
-        typeof entry.id !== "string" ||
-        typeof entry. !== "string" ||
-        !/^\d{4}-\d{2}-\d{2}$/.test(entry.),
-    )
+   entries.some(
+  (entry) =>
+    typeof entry.id !== "string" ||
+    typeof entry.date !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(entry.date),
+)
   ) {
     throw new Error("Saved sighting history is not valid.");
   }
