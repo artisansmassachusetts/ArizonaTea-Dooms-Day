@@ -132,23 +132,21 @@ function render(entries) {
 
 dateInput.value = localToday();
 
-try {
-  render(loadEntries());
-  const lowButton =
-  document.querySelector(
-    "#timeline-low"
-  );
+const lowButton =
+  document.querySelector("#timeline-low");
 
 const normalButton =
-  document.querySelector(
-    "#timeline-normal"
-  );
+  document.querySelector("#timeline-normal");
 
 const highButton =
-  document.querySelector(
-    "#timeline-high"
-  );
+  document.querySelector("#timeline-high");
+
+try {
+  render(loadEntries());
 } catch {
+  message.textContent =
+    "Could not load saved sightings. Your browser storage may be unavailable.";
+}
   message.textContent = "Could not load saved sightings. Your browser storage may be unavailable.";
 }
 function saveTimelineSighting() {
