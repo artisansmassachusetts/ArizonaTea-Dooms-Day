@@ -384,25 +384,85 @@ h1 span {
   75% {
     opacity: 0.45;
   }
-}
-
-.timeline-breach::before {
-  content: "";
-
-  position: fixed;
-  inset: 0;
-
-  z-index: 9999;
+.timeline-breach {
 
   background:
-    rgba(255, 0, 40, .28);
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 51, 79, .08),
+      transparent 70%
+    ),
+    var(--paper);
 
-  pointer-events: none;
+}
+.timeline-breach .clock-face {
+
+  transform:
+    scaleX(1.18)
+    scaleY(0.88)
+    rotate(-4deg);
+
+}
+.timeline-breach .clock-face {
+
+  animation:
+    timeline-warp 800ms
+    ease-in-out infinite;
+
+}
+@keyframes timeline-warp {
+
+  0% {
+
+    transform:
+      scaleX(1)
+      scaleY(1)
+      rotate(0deg);
+
+  }
+
+  50% {
+
+    transform:
+      scaleX(1.22)
+      scaleY(0.82)
+      rotate(-6deg);
+
+  }
+
+  100% {
+
+    transform:
+      scaleX(1)
+      scaleY(1)
+      rotate(0deg);
+
+  }
+
+.timeline-breach .clock-hand {
+
+  animation:
+    hand-glitch
+    120ms
+    linear
+    infinite;
+
 }
 
-.timeline-breach .clock-face {
-  transform: scale(1.08);
+@keyframes hand-glitch {
 
-  transition:
-    transform .15s ease;
+  0% {
+    filter: none;
+  }
+
+  50% {
+    transform:
+      translateX(-48%);
+  }
+
+  100% {
+    transform:
+      translateX(-50%);
+  }
+
 }
