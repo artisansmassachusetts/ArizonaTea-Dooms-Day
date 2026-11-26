@@ -15,6 +15,9 @@ const achievementsElement =
 
 let price = 1.00;
 
+const MAX_PRICE =
+  999999999999.99;
+
 const headlines = [
   "BREAKING: Arizona Tea surpasses gold.",
   "BREAKING: Analysts raise target price to 'yes'.",
@@ -185,11 +188,39 @@ function updateStory() {
 function increasePrice() {
 
   const multiplier =
-    2 +
-    Math.random() * 2;
+    1.4 +
+    Math.random() * 1.2;
 
   price =
     price * multiplier;
+
+  if (price >= MAX_PRICE) {
+
+    price =
+      MAX_PRICE;
+
+    document.body.classList.add(
+      "timeline-breach"
+    );
+
+    warningElement.textContent =
+      "TIMELINE COLLAPSE DETECTED";
+
+    tickerElement.textContent =
+      "RETURNING TO 11:59...";
+
+    renderPrice();
+
+    setTimeout(() => {
+
+      window.location.href =
+        "index.html";
+
+    }, 4000);
+
+    return;
+
+  }
 
   renderPrice();
 
@@ -197,17 +228,13 @@ function increasePrice() {
 
 }
 
-renderPrice();
-
-unlockAchievements();
-
 updateHeadline();
 
 updateStory();
 
 setInterval(
   increasePrice,
-  600
+  1200
 );
 
 setInterval(
