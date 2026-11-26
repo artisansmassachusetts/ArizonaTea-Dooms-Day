@@ -111,11 +111,67 @@ h1 span {
   color: #ffd166;
 }
 
-.price-input-wrap,
-#entry-date {
-  border-color: #62a997;
+.price-input-wrap {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 14px;
+
+  min-height: 54px;
+
+  border: 1px solid #62a997;
+
+  border-radius: 14px;
+
   background: #07443f;
+
+}
+
+.price-prefix {
+
+  color: #ffd166;
+
+  font-weight: 700;
+
+  font-size: 1rem;
+
+}
+
+#entry-price {
+
+  flex: 1;
+
+  border: 0;
+
+  background: transparent;
+
   color: #fff8dc;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  padding: 14px 0;
+
+}
+
+#entry-price::-webkit-outer-spin-button,
+#entry-price::-webkit-inner-spin-button {
+
+  -webkit-appearance: none;
+
+  margin: 0;
+
+}
+
+#entry-price {
+
+  appearance: textfield;
+
 }
 
 .submit-button {
