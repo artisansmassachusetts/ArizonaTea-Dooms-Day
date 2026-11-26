@@ -121,25 +121,31 @@ celebrate the price, and keep an eye on the clock. Somehow, it's still holding a
             <form id="price-form">
               <label for="entry-date">Sighting date</label>
               <input id="entry-date" name="date" type="date" required />
-              <label for="entry-price">
-  Price Seen
-</label>
+              <div class="timeline-options">
 
-<div class="price-input-wrap">
+  <button
+    type="button"
+    id="timeline-low"
+    class="timeline-button timeline-good"
+  >
+    😇 Less Than 99¢
+  </button>
 
-  <span class="price-prefix">
-    $
-  </span>
+  <button
+    type="button"
+    id="timeline-normal"
+    class="timeline-button timeline-normal"
+  >
+    ✅ Verify 99¢ Timeline
+  </button>
 
-  <input
-    id="entry-price"
-    name="price"
-    type="number"
-    step="0.01"
-    min="0.99"
-    value="0.99"
-    required
-  />
+  <button
+    type="button"
+    id="timeline-high"
+    class="timeline-button timeline-evil"
+  >
+    😈 Greater Than 99¢
+  </button>
 
 </div>
               <button class="submit-button" type="submit">
