@@ -1,5 +1,4 @@
 const STORAGE_KEY = "arizona-watch-prices";
-const dateInput = document.querySelector("#entry-date");
 const message = document.querySelector("#form-message");
 const historyList = document.querySelector("#history-list");
 const FIXED_PRICE = 0.99;
@@ -35,8 +34,8 @@ function loadEntries() {
     entries.some(
       (entry) =>
         typeof entry.id !== "string" ||
-        typeof entry.date !== "string" ||
-        !/^\d{4}-\d{2}-\d{2}$/.test(entry.date),
+        typeof entry. !== "string" ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(entry.),
     )
   ) {
     throw new Error("Saved sighting history is not valid.");
