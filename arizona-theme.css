@@ -293,151 +293,54 @@ h1 span {
 ========================== */
 
 .timeline-breach {
-  animation:
-    breach-flicker 0.12s linear 25;
-}
-
-.timeline-breach .clock-face {
-  border-color: #ff334f;
-
-  box-shadow:
-    0 0 25px rgba(255, 51, 79, .7),
-    0 0 80px rgba(255, 51, 79, .5),
-    inset 0 0 24px rgba(255, 51, 79, .2);
-}
-
-.timeline-breach .clock-time {
-  color: #ff334f;
-
-  text-shadow:
-    0 0 12px rgba(255, 51, 79, .85);
-}
-
-.timeline-breach .clock-hand-hour {
-  transform:
-    translateX(-50%)
-    rotate(85deg);
-
-  transition:
-    transform .15s ease;
-}
-
-.timeline-breach .clock-hand-minute {
-  transform:
-    translateX(-50%)
-    rotate(330deg);
-
-  transition:
-    transform .15s ease;
-}
-
-.timeline-breach #latest-price {
-  color: #ff334f;
-
-  text-shadow:
-    0 0 12px rgba(255, 51, 79, .8),
-    0 0 25px rgba(255, 51, 79, .5);
-}
-
-.timeline-breach .summary-card {
-  filter: contrast(1.15);
-}
-
-.timeline-breach .current-card {
-  filter:
-    saturate(1.2)
-    brightness(1.1);
-}
-
-.timeline-breach .warning-light {
-  box-shadow:
-    0 0 18px rgba(255, 51, 79, .95);
-}
-.timeline-breach .clock-whisper {
-
-  display: block;
-
-  color: #ffd166;
-
-  animation:
-    wonderland-float 1.2s
-    ease-in-out infinite;
-
-  text-shadow:
-    0 0 15px rgba(255,209,102,.9);
-
-}
-@keyframes breach-flicker {
-
-  0%, 100% {
-    opacity: 1;
-  }
-
-  25% {
-    opacity: 0.35;
-  }
-
-  50% {
-    opacity: 0.95;
-  }
-
-  75% {
-    opacity: 0.45;
-  }
-.timeline-breach {
 
   background:
     radial-gradient(
       ellipse at center,
-      rgba(255, 51, 79, .08),
+      rgba(255, 51, 79, .12),
       transparent 70%
     ),
     var(--paper);
 
 }
+
 .timeline-breach .clock-face {
 
-  transform:
-    scaleX(1.18)
-    scaleY(0.88)
-    rotate(-4deg);
+  border-color: #ff334f;
 
-}
-.timeline-breach .clock-face {
+  box-shadow:
+    0 0 25px rgba(255, 51, 79, .7),
+    0 0 80px rgba(255, 51, 79, .4),
+    inset 0 0 24px rgba(255, 51, 79, .25);
 
   animation:
-    timeline-warp 800ms
-    ease-in-out infinite;
+    timeline-warp
+    650ms
+    ease-in-out
+    infinite;
 
 }
-@keyframes timeline-warp {
 
-  0% {
+.timeline-breach .clock-time {
 
-    transform:
-      scaleX(1)
-      scaleY(1)
-      rotate(0deg);
+  color: #ff334f;
 
-  }
+  text-shadow:
+    0 0 12px rgba(255, 51, 79, .85);
 
-  50% {
+}
 
-    transform:
-      scaleX(1.22)
-      scaleY(0.82)
-      rotate(-6deg);
+.clock-hand-hour {
+  transform:
+    translateX(-50%)
+    rotate(359.5deg);
+}
 
-  }
-
-  100% {
-
-    transform:
-      scaleX(1)
-      scaleY(1)
-      rotate(0deg);
-
-  }
+.clock-hand-minute {
+  transform:
+    translateX(-50%)
+    rotate(354deg);
+}
 
 .timeline-breach .clock-hand {
 
@@ -449,20 +352,137 @@ h1 span {
 
 }
 
-@keyframes hand-glitch {
+.timeline-breach #latest-price {
+
+  color: #ff334f;
+
+  text-shadow:
+    0 0 12px rgba(255, 51, 79, .8),
+    0 0 25px rgba(255, 51, 79, .5);
+
+}
+
+.timeline-breach .summary-card {
+
+  filter:
+    contrast(1.1);
+
+}
+
+.timeline-breach .current-card {
+
+  filter:
+    saturate(1.15)
+    brightness(1.05);
+
+}
+
+.timeline-breach .warning-light {
+
+  box-shadow:
+    0 0 18px rgba(255, 51, 79, .95);
+
+}
+
+.timeline-breach .clock-whisper {
+
+  display: block;
+
+  opacity: 0;
+
+  color: #ffd166;
+
+  animation:
+    whisper-fade .8s forwards,
+    wonderland-float 1.2s ease-in-out infinite;
+
+  text-shadow:
+    0 0 15px rgba(255,209,102,.9);
+
+}
+
+@keyframes timeline-warp {
 
   0% {
-    filter: none;
+
+    transform:
+      scale(1)
+      rotate(0deg);
+
+  }
+
+  25% {
+
+    transform:
+      scaleX(1.16)
+      scaleY(.86)
+      rotate(-3deg);
+
   }
 
   50% {
+
     transform:
-      translateX(-48%);
+      scale(1.25)
+      rotate(-6deg);
+
+  }
+
+  75% {
+
+    transform:
+      scaleX(.88)
+      scaleY(1.12)
+      rotate(3deg);
+
   }
 
   100% {
+
+    transform:
+      scale(1)
+      rotate(0deg);
+
+  }
+
+}
+
+@keyframes hand-glitch {
+
+  0% {
+
+    filter: none;
+
+  }
+
+  50% {
+
+    transform:
+      translateX(-48%);
+
+  }
+
+  100% {
+
     transform:
       translateX(-50%);
+
+  }
+
+}
+
+@keyframes whisper-fade {
+
+  from {
+
+    opacity: 0;
+
+  }
+
+  to {
+
+    opacity: 1;
+
   }
 
 }
