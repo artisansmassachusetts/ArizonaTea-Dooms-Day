@@ -59,7 +59,7 @@ function render(entries) {
     )
     .map(({ entry }) => entry);
 
-  dateInput.value ||= localToday();
+// removed
   document.querySelector("#entry-count").textContent =
     entries.length === 1 ? "1 sighting in your log" : `${entries.length} sightings in your log`;
 
@@ -128,8 +128,6 @@ function render(entries) {
     }),
   );
 }
-
-dateInput.value = localToday();
 
 const lowButton =
   document.querySelector("#timeline-low");
