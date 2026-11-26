@@ -188,8 +188,8 @@ function updateStory() {
 function increasePrice() {
 
   const multiplier =
-    1.6 +
-    Math.random() * 1.4;
+    1.8 +
+    Math.random() * 1.6;
 
   price =
     price * multiplier;
@@ -234,7 +234,7 @@ updateStory();
 
 setInterval(
   increasePrice,
-  990
+  750
 );
 
 setInterval(
