@@ -134,31 +134,134 @@ dateInput.value = localToday();
 
 try {
   render(loadEntries());
+  const lowButton =
+  document.querySelector(
+    "#timeline-low"
+  );
+
+const normalButton =
+  document.querySelector(
+    "#timeline-normal"
+  );
+
+const highButton =
+  document.querySelector(
+    "#timeline-high"
+  );
 } catch {
   message.textContent = "Could not load saved sightings. Your browser storage may be unavailable.";
 }
+function saveTimelineSighting() {
 
-priceForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  message.textContent = "";
+  const date =
+    dateInput.value;
 
-  const date = dateInput.value;
-  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    message.textContent = "Choose a valid date for your sighting.";
-    return;
+  if (
+    !date ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(date)
+  ) {
+
+    message.textContent =
+      "Choose a valid date first.";
+
+    return false;
+
   }
 
-  try {
-    const entries = loadEntries();
-    entries.push({ id: crypto.randomUUID(), price: FIXED_PRICE, date });
-    saveEntries(entries);
-    priceForm.reset();
-    dateInput.value = localToday();
-    render(entries);
-  } catch {
-    message.textContent = "Could not save this sighting. Please check your browser storage and try again.";
-  }
+  const entries =
+    loadEntries();
+
+  entries.push({
+
+    id:
+      crypto.randomUUID(),
+
+    price:
+      FIXED_PRICE,
+
+    date
+
   });
+
+  saveEntries(entries);
+
+  render(entries);
+
+  return true;
+
+}
+normalButton?.addEventListener(
+  "click",
+  () => {
+
+    try {
+
+      if (
+        saveTimelineSighting()
+      ) {
+
+        message.textContent =
+          "✅ Timeline verified. Arizona Tea remains 99¢.";
+
+      }
+
+    } catch {
+
+      message.textContent =
+        "Could not save this sighting.";
+
+    }
+
+  }
+);
+lowButton?.addEventListener(
+  "click",
+  () => {
+
+    message.textContent =
+      "😇 Blessed timeline detected. Arizona Tea is somehow cheaper than 99¢.";
+
+  }
+);
+highButton?.addEventListener(
+  "click",
+  () => {
+
+    message.textContent =
+      "😈 PRICE ANOMALY DETECTED";
+
+    document.body.classList.add(
+      "timeline-breach"
+    );
+
+    if (clockTime) {
+
+      clockTime.textContent =
+        "12:01";
+
+    }
+
+    if (latestDate) {
+
+      latestDate.textContent =
+        "OPENING FORBIDDEN TIMELINE";
+
+    }
+
+    playTimelineBreachSound();
+
+    setTimeout(
+      () => {
+
+        window.location.href =
+          "midnight.html";
+
+      },
+      1800
+    );
+
+  }
+);
 // =====================================
 // TIMELINE BREACH EVENT
 // Alternate timeline leaks into page.
