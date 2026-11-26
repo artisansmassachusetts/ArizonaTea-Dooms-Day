@@ -6,7 +6,7 @@
   "@context":"https://schema.org",
   "@type":"WebSite",
   "name":"Arizona Tea Price Watch",
-  "url":"https://arizonateadoomsdayclock.com/",
+  "url":"https://arizoniateadoomsdayclock.com/",
   "description":"A fan-made project celebrating the legendary Arizona Tea 99 cent can."
 }
 </script>
@@ -18,10 +18,6 @@
     <meta
   name="description"
   content="Arizona Tea Price Watch tracks the legendary 99¢ Arizona Iced Tea can. Log sightings, celebrate the famous price, and discover the hidden 12:01 timeline."
-/>
-    <meta
-  name="keywords"
-  content="Arizona Tea, Arizona Tea 99 cents, Arizona Tea price, Arizona Tea price watch, Arizona Tea tracker, Arizona Iced Tea, Arizona Tea inflation"
 />
     <meta name="theme-color" content="#073c3b" />
    <title>Arizona Tea Price Watch | Tracking the Legendary 99¢ Can</title>
@@ -38,7 +34,7 @@
   <body>
     <main class="page-shell">
       <header class="topbar">
-        <a class="brand" href="index.html" aria-label="Arizona Tea Price Watch home">
+        <a class="brand" href="#" aria-label="Arizona Tea Price Watch home">
   <span class="brand-mark" aria-hidden="true">99¢</span>
   <span>ARIZONA TEA <span class="brand-light">PRICE WATCH</span></span>
 </a>
@@ -114,44 +110,16 @@ celebrate the price, and keep an eye on the clock. Somehow, it's still holding a
             <div class="panel-heading">
               <span class="step-number">01</span>
               <div>
-                <h2 id="add-title">
-  Verify The Timeline
-</h2>
-
-<p>
-  Choose your reality.
-</p>
+                <h2 id="add-title">Spot the legend</h2>
+                <p>Log another 99¢ sighting.</p>
               </div>
             </div>
             <form id="price-form">
-              <div class="timeline-options">
-
-  <button
-    type="button"
-    id="timeline-low"
-    class="timeline-button timeline-good"
-  >
-    😇 Less Than 99¢
-  </button>
-
-  <button
-  type="button"
-  id="timeline-normal"
-  class="timeline-button timeline-normal"
->
-  ✅ Log A 99¢ Sighting
-</button>
-
-  <button
-    type="button"
-    id="timeline-high"
-    class="timeline-button timeline-evil"
-  >
-    😈 Greater Than 99¢
-  </button>
-
-</div>
-
+              <label for="entry-date">Sighting date</label>
+              <input id="entry-date" name="date" type="date" required />
+              <button class="submit-button" type="submit">
+                Log a 99¢ sighting <span aria-hidden="true">↗</span>
+              </button>
               <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
             </form>
             <div class="tiny-note"><span aria-hidden="true">✳</span> A tribute tracker, not a live store-price feed.</div>
@@ -185,53 +153,23 @@ celebrate the price, and keep an eye on the clock. Somehow, it's still holding a
   </h2>
 
   <p>
-    Arizona Tea became famous for printing 99¢ directly on many of its
-    classic cans. Over time, the Arizona Tea 99¢ can became one of the
-    most recognizable beverage prices in the United States.
+    Arizona Tea has become famous for keeping many of its classic cans marked
+    at 99 cents. While prices can vary by retailer and region, the iconic
+    99¢ Arizona Tea can remains one of the most recognizable beverage prices
+    in the United States.
   </p>
 
   <p>
-    While prices may vary by retailer and region, Arizona Tea remains
-    strongly associated with affordability and value. The famous can has
-    become part of the brand's identity and is frequently discussed by
-    consumers online.
-  </p>
-
-  <p>
-    Arizona Tea Price Watch is a fan-made project celebrating the
-    legendary Arizona Tea can. Visitors can log sightings, track the
-    famous price, and learn more about the history behind one of
-    America's most recognizable beverage brands.
-  </p>
-
-  <p>
-    Want to learn more?
-    <a href="why-is-arizona-tea-still-99-cents.html">
-      Read our complete guide to why Arizona Tea is still associated
-      with 99¢.
-    </a>
+    Arizona Tea Price Watch is a fan-made project celebrating the legendary
+    Arizona Iced Tea price. Log sightings, track the iconic can, and keep an
+    eye on the clock frozen at 11:59.
   </p>
 
 </section>
-<footer class="footer">
-
-  <span>
-    Arizona Tea Price Watch · 99¢ today, 99¢ tomorrow.
-  </span>
-
-  <span>
-    <a href="why-is-arizona-tea-still-99-cents.html">
-      Why Is Arizona Tea Still 99¢?
-    </a>
-  </span>
-
-  <span>
-    <a href="midnight.html">
-      What happens at 12:01?
-    </a>
-  </span>
-
-</footer>
+      <footer class="footer">
+        <span>Arizona Tea Price Watch <span aria-hidden="true">·</span> 99¢ today, 99¢ tomorrow.</span>
+        <span>Clock permanently frozen at 11:59 <span aria-hidden="true">✳</span></span>
+      </footer>
     </main>
   </body>
 </html>
