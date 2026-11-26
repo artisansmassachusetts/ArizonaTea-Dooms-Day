@@ -150,21 +150,6 @@ try {
 }
 function saveTimelineSighting() {
 
-  const date =
-    dateInput.value;
-
-  if (
-    !date ||
-    !/^\d{4}-\d{2}-\d{2}$/.test(date)
-  ) {
-
-    message.textContent =
-      "Choose a valid date first.";
-
-    return false;
-
-  }
-
   const entries =
     loadEntries();
 
@@ -176,17 +161,23 @@ function saveTimelineSighting() {
     price:
       FIXED_PRICE,
 
-    date
+    date:
+      localToday()
 
   });
 
-  saveEntries(entries);
+  saveEntries(
+    entries
+  );
 
-  render(entries);
+  render(
+    entries
+  );
 
   return true;
 
 }
+
 normalButton?.addEventListener(
   "click",
   () => {
