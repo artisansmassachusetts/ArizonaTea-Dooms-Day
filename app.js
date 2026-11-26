@@ -1,4 +1,5 @@
 const STORAGE_KEY = "arizona-watch-prices";
+const dateInput = document.querySelector("#entry-date");
 const message = document.querySelector("#form-message");
 const historyList = document.querySelector("#history-list");
 const FIXED_PRICE = 0.99;
@@ -31,12 +32,12 @@ function loadEntries() {
   const entries = JSON.parse(saved);
   if (
     !Array.isArray(entries) ||
-   entries.some(
-  (entry) =>
-    typeof entry.id !== "string" ||
-    typeof entry.date !== "string" ||
-    !/^\d{4}-\d{2}-\d{2}$/.test(entry.date),
-)
+    entries.some(
+      (entry) =>
+        typeof entry.id !== "string" ||
+        typeof entry.date !== "string" ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(entry.date),
+    )
   ) {
     throw new Error("Saved sighting history is not valid.");
   }
@@ -58,7 +59,7 @@ function render(entries) {
     )
     .map(({ entry }) => entry);
 
-// removed
+  dateInput.value ||= localToday();
   document.querySelector("#entry-count").textContent =
     entries.length === 1 ? "1 sighting in your log" : `${entries.length} sightings in your log`;
 
@@ -128,6 +129,8 @@ function render(entries) {
   );
 }
 
+dateInput.value = localToday();
+
 const lowButton =
   document.querySelector("#timeline-low");
 
@@ -140,9 +143,27 @@ const highButton =
 try {
   render(loadEntries());
 } catch {
+  message.textContent =
+    "Could not load saved sightings. Your browser storage may be unavailable.";
+}
   message.textContent = "Could not load saved sightings. Your browser storage may be unavailable.";
 }
 function saveTimelineSighting() {
+
+  const date =
+    dateInput.value;
+
+  if (
+    !date ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(date)
+  ) {
+
+    message.textContent =
+      "Choose a valid date first.";
+
+    return false;
+
+  }
 
   const entries =
     loadEntries();
@@ -155,23 +176,17 @@ function saveTimelineSighting() {
     price:
       FIXED_PRICE,
 
-    date:
-      localToday()
+    date
 
   });
 
-  saveEntries(
-    entries
-  );
+  saveEntries(entries);
 
-  render(
-    entries
-  );
+  render(entries);
 
   return true;
 
 }
-
 normalButton?.addEventListener(
   "click",
   () => {
@@ -455,4 +470,3 @@ function timelineBreach() {
   }, 3000);
 
 }
-
